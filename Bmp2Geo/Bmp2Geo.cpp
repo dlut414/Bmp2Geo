@@ -1,3 +1,10 @@
+/*
+* LICENCE
+* copyright 2016 ~ ****
+* Some rights reserved.
+* Author: HUFANGYUAN
+* Released under CC BY-NC
+*/
 // Bmp2Geo.cpp : Defines the entry point for the console application.
 //
 
@@ -82,7 +89,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			const unsigned char r = image[id];
 			const unsigned char g = image[id + 1];
 			const unsigned char b = image[id + 2];
-			if (~r || ~g || ~b) NP++;
+			if (r != 0xFF || g != 0xFF || b != 0xFF) NP++;
 		}
 	}
 
@@ -96,27 +103,27 @@ int _tmain(int argc, _TCHAR* argv[])
 			const unsigned char r = image[id];
 			const unsigned char g = image[id+1];
 			const unsigned char b = image[id+2];
-			if (r && g && b) continue;
+			if (r == 0xFF && g == 0xFF && b == 0xFF) continue;
 			const double x = DP* j;
 			const double y = DP* i;
 			///fluid
-			if (~r && ~g && b) {
+			if (r == 0x00 && g == 0x00 && b == 0xFF) {
 				file << 0 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
 			}
 			///wall
-			else if (r && ~g && ~b) {
+			else if (r == 0xFF && g == 0x00 && b == 0x00) {
 				file << 1 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
 			}
 			///dummy
-			else if (~r && ~g && ~b) {
+			else if (r == 0x00 && g == 0x00 && b == 0x00) {
 				file << 2 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
 			}
 			///inlet
-			else if (r && g && ~b) {
+			else if (r == 0xFF && g == 0xFF && b == 0x00) {
 				file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
 			}
 			///outlet
-			else if (~r && g && b) {
+			else if (r == 0x00 && g == 0xFF && b == 0xFF) {
 				file << 4 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
 			}
 		}
