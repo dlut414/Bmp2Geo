@@ -120,7 +120,9 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 			///inlet
 			else if (r == 0xFF && g == 0xFF && b == 0x00) {
-				file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
+				const double u = -6 * y*y + 18.36*y - 12.5454;
+				//file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
+				file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << endl;
 			}
 			///outlet
 			else if (r == 0x00 && g == 0xFF && b == 0xFF) {
