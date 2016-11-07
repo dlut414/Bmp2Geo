@@ -107,26 +107,49 @@ int _tmain(int argc, _TCHAR* argv[])
 			const double x = DP* j;
 			const double y = DP* i;
 			///fluid
-			if (r == 0x00 && g == 0x00 && b == 0xFF) {
+			if (r == 0x00 && g == 0x00 && b > 0x00) {
 				file << 0 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
 			}
 			///wall
-			else if (r == 0xFF && g == 0x00 && b == 0x00) {
-				file << 1 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
+			else if (r > 0x00 && g == 0x00 && b == 0x00) {
+				//file << 1 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
+				if (r == 0xFF) file << 1 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << 1.0 << " " << 0.0 << endl; //right
+				else if (r == 0xFE) file << 1 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << -1.0 << endl; //down
+				else if (r == 0xFD) file << 1 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << -1.0 << " " << 0.0 << endl; //left
+				else if (r == 0xFC) file << 1 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << 1.0 << endl; //up
+				else if (r == 0xEF) file << 1 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << sqrt(2) / 2 << " " << sqrt(2) / 2 << endl; //right up
+				else if (r == 0xEE) file << 1 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << sqrt(2) / 2 << " " << -sqrt(2) / 2 << endl; //right down
+				else if (r == 0xED) file << 1 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << -sqrt(2) / 2 << " " << -sqrt(2) / 2 << endl; //left down
+				else if (r == 0xEC) file << 1 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << -sqrt(2) / 2 << " " << sqrt(2) / 2 << endl; //left up
 			}
 			///dummy
 			else if (r == 0x00 && g == 0x00 && b == 0x00) {
 				file << 2 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
 			}
 			///inlet
-			else if (r == 0xFF && g == 0xFF && b == 0x00) {
-				const double u = -6 * y*y + 18.36*y - 12.5454;
-				//file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
-				file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << endl;
+			else if (r > 0x00 && g > 0x00 && b == 0x00) {
+				const double u = -3 * (y - 1.075)*(y - 2.075);
+				//file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << endl;
+				if (r == 0xFF) file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << 1.0 << " " << 0.0 << endl; //right
+				else if (r == 0xFE) file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << -1.0 << endl; //down
+				else if (r == 0xFD) file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << -1.0 << " " << 0.0 << endl; //left
+				else if (r == 0xFC) file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << 1.0 << endl; //up
+				else if (r == 0xEF) file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << sqrt(2) / 2 << " " << sqrt(2) / 2 << endl; //right up
+				else if (r == 0xEE) file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << sqrt(2) / 2 << " " << -sqrt(2) / 2 << endl; //right down
+				else if (r == 0xED) file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << -sqrt(2) / 2 << " " << -sqrt(2) / 2 << endl; //left down
+				else if (r == 0xEC) file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << -sqrt(2) / 2 << " " << sqrt(2) / 2 << endl; //left up
 			}
 			///outlet
-			else if (r == 0x00 && g == 0xFF && b == 0xFF) {
-				file << 4 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
+			else if (r == 0x00 && g > 0x00 && b > 0x00) {
+				//file << 4 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << endl;
+				if (g == 0xFF) file << 4 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << 1.0 << " " << 0.0 << endl; //right
+				else if (g == 0xFE) file << 4 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << -1.0 << endl; //down
+				else if (g == 0xFD) file << 4 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << -1.0 << " " << 0.0 << endl; //left
+				else if (g == 0xFC) file << 4 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << 1.0 << endl; //up
+				else if (g == 0xEF) file << 4 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << sqrt(2) / 2 << " " << sqrt(2) / 2 << endl; //right up
+				else if (g == 0xEE) file << 4 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << sqrt(2) / 2 << " " << -sqrt(2) / 2 << endl; //right down
+				else if (g == 0xED) file << 4 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << -sqrt(2) / 2 << " " << -sqrt(2) / 2 << endl; //left down
+				else if (g == 0xEC) file << 4 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << -sqrt(2) / 2 << " " << sqrt(2) / 2 << endl; //left up
 			}
 		}
 	}
