@@ -135,7 +135,10 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 			///inlet
 			else if (r > 0x00 && g > 0x00 && b == 0x00) {
-				const double u = -3 * (y - 1.0)*(y - 2.0);
+				//const double u = 0;
+				const double u = -4 * (y - 1.0)*(y - 2.0);
+				//const double u = -3 * (y - 1.0)*(y - 2.0);
+				//const double u = -3 * (y - 0.97)*(y - 1.97);
 				//file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << endl;
 				if (r == 0xFF) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << 1.0 << " " << 0.0 << " " << x << " " << y << endl; //right
 				else if (r == 0xFE) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << -1.0 << " " << x << " " << y << endl; //down
