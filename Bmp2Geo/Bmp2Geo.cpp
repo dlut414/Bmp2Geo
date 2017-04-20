@@ -135,19 +135,20 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 			///inlet
 			else if (r > 0x00 && g > 0x00 && b == 0x00) {
-				//const double u = 0;
-				const double u = -4 * (y - 1.0)*(y - 2.0);
+				const double u = 0;
+				//const double u = -4 * (y - 1.0)*(y - 2.0);
+				const double v = -4*(x-0.06)*(x-1.06);
 				//const double u = -3 * (y - 1.0)*(y - 2.0);
 				//const double u = -3 * (y - 0.97)*(y - 1.97);
 				//file << 3 << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << endl;
-				if (r == 0xFF) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << 1.0 << " " << 0.0 << " " << x << " " << y << endl; //right
-				else if (r == 0xFE) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << -1.0 << " " << x << " " << y << endl; //down
-				else if (r == 0xFD) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << -1.0 << " " << 0.0 << " " << x << " " << y << endl; //left
-				else if (r == 0xFC) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << 1.0 << " " << x << " " << y << endl; //up
-				else if (r == 0xEF) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << sqrt(2) / 2 << " " << sqrt(2) / 2 << " " << x << " " << y << endl; //right up
-				else if (r == 0xEE) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << sqrt(2) / 2 << " " << -sqrt(2) / 2 << " " << x << " " << y << endl; //right down
-				else if (r == 0xED) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << -sqrt(2) / 2 << " " << -sqrt(2) / 2 << " " << x << " " << y << endl; //left down
-				else if (r == 0xEC) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << 0.0 << " " << 0.0 << " " << -sqrt(2) / 2 << " " << sqrt(2) / 2 << " " << x << " " << y << endl; //left up
+				if (r == 0xFF) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << v << " " << 0.0 << " " << 1.0 << " " << 0.0 << " " << x << " " << y << endl; //right
+				else if (r == 0xFE) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << v << " " << 0.0 << " " << 0.0 << " " << -1.0 << " " << x << " " << y << endl; //down
+				else if (r == 0xFD) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << v << " " << 0.0 << " " << -1.0 << " " << 0.0 << " " << x << " " << y << endl; //left
+				else if (r == 0xFC) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << v << " " << 0.0 << " " << 0.0 << " " << 1.0 << " " << x << " " << y << endl; //up
+				else if (r == 0xEF) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << v << " " << 0.0 << " " << sqrt(2) / 2 << " " << sqrt(2) / 2 << " " << x << " " << y << endl; //right up
+				else if (r == 0xEE) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << v << " " << 0.0 << " " << sqrt(2) / 2 << " " << -sqrt(2) / 2 << " " << x << " " << y << endl; //right down
+				else if (r == 0xED) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << v << " " << 0.0 << " " << -sqrt(2) / 2 << " " << -sqrt(2) / 2 << " " << x << " " << y << endl; //left down
+				else if (r == 0xEC) file << INLET << std::scientific << std::setprecision(6) << " " << x << " " << y << " " << u << " " << v << " " << 0.0 << " " << -sqrt(2) / 2 << " " << sqrt(2) / 2 << " " << x << " " << y << endl; //left up
 			}
 			///outlet
 			else if (r == 0x00 && g > 0x00 && b > 0x00) {

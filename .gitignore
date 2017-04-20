@@ -8,3 +8,5 @@
 *.bmp
 *.exe
 *.in
+*.idb
+*.ilk
